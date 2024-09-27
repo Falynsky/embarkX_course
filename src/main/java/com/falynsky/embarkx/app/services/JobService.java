@@ -1,4 +1,6 @@
-package com.falynsky.embarkx.job;
+package com.falynsky.embarkx.app.services;
+
+import com.falynsky.embarkx.app.enities.Job;
 
 import java.util.List;
 

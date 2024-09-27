@@ -1,5 +1,7 @@
-package com.falynsky.embarkx.job;
+package com.falynsky.embarkx.app.controllers;
 
+import com.falynsky.embarkx.app.services.JobService;
+import com.falynsky.embarkx.app.enities.Job;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
