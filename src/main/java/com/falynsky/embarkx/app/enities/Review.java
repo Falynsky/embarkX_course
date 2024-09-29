@@ -28,7 +28,7 @@ public class Review {
     private String description;
 
     @Column(name = "rating", nullable = false)
-    private double rating;
+    private Double rating;
 
     @JsonIgnore
     @ManyToOne
