@@ -2,6 +2,8 @@ package com.falynsky.embarkx.app.controllers;
 
 import com.falynsky.embarkx.app.services.JobService;
 import com.falynsky.embarkx.app.enities.Job;
+import com.falynsky.embarkx.app.to.CreateJobTO;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -26,14 +28,9 @@ public class JobController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> createJob(@RequestBody Job job) {
-        jobService.createJob(job);
-        URI location = ServletUriComponentsBuilder.fromCurrentRequest()
-                .path("/{id}")
-                .buildAndExpand(job.getId())
-                .toUri();
-
-        return ResponseEntity.created(location).build();
+    public ResponseEntity<String> createJob(@RequestBody CreateJobTO createJobTO) {
+        jobService.createJob(createJobTO);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @GetMapping("/{id}")
@@ -60,8 +57,7 @@ public class JobController {
         return ResponseEntity.ok().build();
     }
 
-//    @PutMapping("/{id}")
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
+    @PutMapping("/{id}")
     public ResponseEntity<Void> updateJob(@PathVariable Long id, @RequestBody Job job) {
         Job existingJob = jobService.findById(id);
 

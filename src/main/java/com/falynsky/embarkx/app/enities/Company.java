@@ -1,9 +1,14 @@
 package com.falynsky.embarkx.app.enities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Getter;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
+import lombok.ToString;
 import org.hibernate.proxy.HibernateProxy;
 
+import java.util.List;
 import java.util.Objects;
 
 @Getter
@@ -11,32 +16,29 @@ import java.util.Objects;
 @ToString
 @RequiredArgsConstructor
 @Entity
-@Table(name = "job")
-public class Job {
+@Table(name = "company")
+public class Company {
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "job_gen")
-    @SequenceGenerator(name = "job_gen", sequenceName = "job_seq", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "company_gen")
+    @SequenceGenerator(name = "company_gen", sequenceName = "company_seq", allocationSize = 1)
     @Column(name = "id", nullable = false, unique = true)
     private Long id;
 
-    @Column(name = "title", nullable = false, unique = true)
-    private String title;
+    @Column(name = "name", nullable = false, unique = true)
+    private String name;
 
-    @Column(name = "description", nullable = false)
-    private String description;
+    @Column(name = "city", nullable = false)
+    private String city;
 
-    @Column(name = "min_salary", nullable = false)
-    private Long minSalary;
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    @ToString.Exclude
+    private List<Job> jobs;
 
-    @Column(name = "max_salary", nullable = false)
-    private Long maxSalary;
-
-    @Column(name = "location", nullable = false)
-    private String location;
-
-    @ManyToOne
-    @JoinColumn(name = "company_id", nullable = false)
-    private Company company;
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
+    @JsonIgnore
+    @ToString.Exclude
+    private List<Review> reviews;
 
     @Version
     @Column(name = "version", nullable = false)
@@ -49,7 +51,7 @@ public class Job {
         Class<?> oEffectiveClass = o instanceof HibernateProxy ? ((HibernateProxy) o).getHibernateLazyInitializer().getPersistentClass() : o.getClass();
         Class<?> thisEffectiveClass = this instanceof HibernateProxy ? ((HibernateProxy) this).getHibernateLazyInitializer().getPersistentClass() : this.getClass();
         if (thisEffectiveClass != oEffectiveClass) return false;
-        Job job = (Job) o;
+        Company job = (Company) o;
         return getId() != null && Objects.equals(getId(), job.getId());
     }
 

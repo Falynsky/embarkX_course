@@ -1,18 +1,22 @@
 package com.falynsky.embarkx.app.services.impl;
 
+import com.falynsky.embarkx.app.repositories.CompanyRepository;
 import com.falynsky.embarkx.app.repositories.JobRepository;
 import com.falynsky.embarkx.app.services.JobService;
 import com.falynsky.embarkx.app.enities.Job;
+import com.falynsky.embarkx.app.to.CreateJobTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.NoSuchElementException;
 
 @AllArgsConstructor
 @Service
 public class JobServiceImpl implements JobService {
 
     JobRepository jobRepository;
+    CompanyRepository companyRepository;
 
     @Override
     public List<Job> findAll() {
@@ -25,8 +29,21 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public void createJob(Job job) {
-        jobRepository.save(job);
+    public void createJob(CreateJobTO createJobTO) {
+        Job newJob = new Job();
+        newJob.setTitle(createJobTO.getTitle());
+        newJob.setDescription(createJobTO.getDescription());
+        newJob.setMinSalary(createJobTO.getMinSalary());
+        newJob.setMaxSalary(createJobTO.getMaxSalary());
+        newJob.setLocation(createJobTO.getLocation());
+        companyRepository.findById(createJobTO.getCompanyId())
+                .ifPresentOrElse(
+                        newJob::setCompany,
+                        () -> {
+                            throw new NoSuchElementException("Company not found");
+                        });
+
+        jobRepository.save(newJob);
     }
 
     @Override
