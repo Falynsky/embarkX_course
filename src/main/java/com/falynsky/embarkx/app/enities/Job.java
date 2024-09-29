@@ -1,5 +1,6 @@
 package com.falynsky.embarkx.app.enities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
@@ -34,10 +35,12 @@ public class Job {
     @Column(name = "location", nullable = false)
     private String location;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "company_id", nullable = false)
     private Company company;
 
+    @JsonIgnore
     @Version
     @Column(name = "version", nullable = false)
     private Long version;

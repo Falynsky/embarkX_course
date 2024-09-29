@@ -23,6 +23,7 @@ CREATE TABLE review (
                         review TEXT NOT NULL,
                         description TEXT NOT NULL,
                         rating DOUBLE PRECISION NOT NULL,
+                        version BIGINT       NOT NULL,
                         company_id  BIGINT       NOT NULL,
                         CONSTRAINT fk_company FOREIGN KEY (company_id) REFERENCES company (id)
 );

@@ -30,16 +30,17 @@ public class Company {
     @Column(name = "city", nullable = false)
     private String city;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private List<Job> jobs;
 
-    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     @JsonIgnore
+    @OneToMany(mappedBy = "company", cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private List<Review> reviews;
 
+    @JsonIgnore
     @Version
     @Column(name = "version", nullable = false)
     private Long version;
