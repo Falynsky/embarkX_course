@@ -2,7 +2,7 @@ package com.falynsky.embarkx.app.controllers;
 
 import com.falynsky.embarkx.app.enities.Review;
 import com.falynsky.embarkx.app.services.ReviewService;
-import com.falynsky.embarkx.app.to.UpdateReviewTO;
+import com.falynsky.embarkx.app.dto.ReviewDTO;
 import lombok.Data;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +36,7 @@ public class ReviewController {
     }
 
     @PutMapping("/reviews/{reviewId}")
-    public ResponseEntity<Void> updateReview(@PathVariable Long companyId, @PathVariable Long reviewId, @RequestBody UpdateReviewTO updatedReview) {
+    public ResponseEntity<Void> updateReview(@PathVariable Long companyId, @PathVariable Long reviewId, @RequestBody ReviewDTO updatedReview) {
         reviewService.updateReview(companyId, reviewId, updatedReview);
         return ResponseEntity.ok().build();
     }

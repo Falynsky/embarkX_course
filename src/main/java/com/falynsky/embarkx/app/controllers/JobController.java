@@ -2,13 +2,11 @@ package com.falynsky.embarkx.app.controllers;
 
 import com.falynsky.embarkx.app.services.JobService;
 import com.falynsky.embarkx.app.enities.Job;
-import com.falynsky.embarkx.app.to.CreateJobTO;
+import com.falynsky.embarkx.app.dto.JobDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import java.net.URI;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -28,8 +26,8 @@ public class JobController {
     }
 
     @PostMapping()
-    public ResponseEntity<String> createJob(@RequestBody CreateJobTO createJobTO) {
-        jobService.createJob(createJobTO);
+    public ResponseEntity<String> createJob(@RequestBody JobDTO jobDTO) {
+        jobService.createJob(jobDTO);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 

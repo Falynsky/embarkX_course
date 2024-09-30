@@ -1,7 +1,7 @@
 package com.falynsky.embarkx.app.services;
 
 import com.falynsky.embarkx.app.enities.Job;
-import com.falynsky.embarkx.app.to.CreateJobTO;
+import com.falynsky.embarkx.app.dto.JobDTO;
 
 import java.util.List;
 
@@ -11,7 +11,7 @@ public interface JobService {
 
     Job findById(Long id);
 
-    void createJob(CreateJobTO job);
+    void createJob(JobDTO jobDTO);
 
     void deleteJob(Long id);
 

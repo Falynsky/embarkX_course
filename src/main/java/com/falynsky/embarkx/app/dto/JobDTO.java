@@ -1,4 +1,4 @@
-package com.falynsky.embarkx.app.to;
+package com.falynsky.embarkx.app.dto;
 
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -7,7 +7,7 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor
-public class CreateJobTO {
+public class JobDTO {
 
     @JsonProperty("title")
     private String title;

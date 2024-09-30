@@ -4,7 +4,7 @@ import com.falynsky.embarkx.app.repositories.CompanyRepository;
 import com.falynsky.embarkx.app.repositories.JobRepository;
 import com.falynsky.embarkx.app.services.JobService;
 import com.falynsky.embarkx.app.enities.Job;
-import com.falynsky.embarkx.app.to.CreateJobTO;
+import com.falynsky.embarkx.app.dto.JobDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -29,14 +29,14 @@ public class JobServiceImpl implements JobService {
     }
 
     @Override
-    public void createJob(CreateJobTO createJobTO) {
+    public void createJob(JobDTO jobDTO) {
         Job newJob = new Job();
-        newJob.setTitle(createJobTO.getTitle());
-        newJob.setDescription(createJobTO.getDescription());
-        newJob.setMinSalary(createJobTO.getMinSalary());
-        newJob.setMaxSalary(createJobTO.getMaxSalary());
-        newJob.setLocation(createJobTO.getLocation());
-        companyRepository.findById(createJobTO.getCompanyId())
+        newJob.setTitle(jobDTO.getTitle());
+        newJob.setDescription(jobDTO.getDescription());
+        newJob.setMinSalary(jobDTO.getMinSalary());
+        newJob.setMaxSalary(jobDTO.getMaxSalary());
+        newJob.setLocation(jobDTO.getLocation());
+        companyRepository.findById(jobDTO.getCompanyId())
                 .ifPresentOrElse(
                         newJob::setCompany,
                         () -> {

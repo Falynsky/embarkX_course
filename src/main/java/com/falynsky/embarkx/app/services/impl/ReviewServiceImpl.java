@@ -4,7 +4,7 @@ import com.falynsky.embarkx.app.enities.Review;
 import com.falynsky.embarkx.app.repositories.CompanyRepository;
 import com.falynsky.embarkx.app.repositories.ReviewRepository;
 import com.falynsky.embarkx.app.services.ReviewService;
-import com.falynsky.embarkx.app.to.UpdateReviewTO;
+import com.falynsky.embarkx.app.dto.ReviewDTO;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +41,7 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public void updateReview(Long companyId, Long reviewId, UpdateReviewTO updatedReview) {
+    public void updateReview(Long companyId, Long reviewId, ReviewDTO updatedReview) {
         if (!companyRepository.existsById(companyId)) {
             throw new NoSuchElementException("Company not found");
         }
